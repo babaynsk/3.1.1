@@ -30,20 +30,13 @@ public class UserDAOlmpl implements UserDAO {
     }
 
     @Override
-    public void updateUser(User user, int id) {
-        User userToBeUpdated = getUserById(id);
-        userToBeUpdated.setName(user.getName());
-        userToBeUpdated.setSurname(user.getSurname());
-        userToBeUpdated.setDepartment(user.getDepartment());
-        userToBeUpdated.setSalary(user.getSalary());
-        entityManager.merge(userToBeUpdated);
+    public void updateUser(User user) {
+        entityManager.merge(user);
     }
 
     @Override
     public void delete(int id) {
-        User user = getUserById(id);
-        if (user != null) {
-            entityManager.remove(user);
-        }
+        entityManager.createQuery("delete from User user WHERE user.id =:id", User.class)
+                .setParameter("id", id).executeUpdate();
     }
 }

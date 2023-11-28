@@ -5,10 +5,7 @@ import com.example.springboot2_3_1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
@@ -43,18 +40,18 @@ public class UsersController {
     }
 
     @GetMapping("/{id}/updateUser")
-    public String updateUser(@PathVariable("id") int id, Model model) {
+    public String updateUser(@RequestParam("id") int id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "update-user";
     }
 
-    @PostMapping("/saveUpdatedUser/{id}")
-    public String saveUpdatedUser(@ModelAttribute("user") User user, @PathVariable("id") int id) {
-        userService.updateUser(user, id);
+    @PostMapping("/saveUpdatedUser")
+    public String saveUpdatedUser(@ModelAttribute("user") User user) {
+        userService.updateUser(user);
         return "redirect:/all-users";
     }
     @PostMapping("/deleteUser/{id}")
-    public String deleteUser(@PathVariable("id") int id){
+    public String deleteUser(@RequestParam("id") int id){
         userService.delete(id);
         return "redirect:/all-users";
     }

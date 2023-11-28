@@ -37,8 +37,8 @@ public class UserServicelmpl implements UserService {
 
     @Override
     @Transactional
-    public void updateUser(User user,int id) {
-        userDAO.updateUser(user,id);
+    public void updateUser(User user) {
+        userDAO.updateUser(user);
     }
 
     @Override
