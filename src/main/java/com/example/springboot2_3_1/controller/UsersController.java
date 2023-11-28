@@ -50,7 +50,7 @@ public class UsersController {
         userService.updateUser(user);
         return "redirect:/all-users";
     }
-    @PostMapping("/deleteUser/{id}")
+    @PostMapping("/deleteUser")
     public String deleteUser(@RequestParam("id") int id){
         userService.delete(id);
         return "redirect:/all-users";

@@ -36,7 +36,7 @@ public class UserDAOlmpl implements UserDAO {
 
     @Override
     public void delete(int id) {
-        entityManager.createQuery("delete from User user WHERE user.id =:id", User.class)
+        entityManager.createQuery("delete from User user WHERE user.id =:id")
                 .setParameter("id", id).executeUpdate();
     }
 }
